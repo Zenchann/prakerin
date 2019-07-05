@@ -12,7 +12,7 @@
     <title>Viral Story - Viral News Magazine Template</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="{{ asset('assets/frontend/img/core-img/favicon.ico')}}">
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/style.css')}}">
