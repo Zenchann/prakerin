@@ -39,7 +39,7 @@
         </div>
     </div>
 </div>
-@include('admin.artikel.create')
+@include('artikel.create')
 @endsection
 
 @push('scripts')

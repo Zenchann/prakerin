@@ -22,12 +22,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 // Admin
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'cors']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
 
-    // Json
-    Route::get('kategori/json', 'KategoriController@getjson')->name('json_kategori');
-    Route::get('artikel/json', 'ArtikelController@getjson')->name('json_artikel');
-    Route::get('tag/json', 'TagController@getjson')->name('json_tag');
 
     // Resource+
     Route::resource('/kategori', 'KategoriController');

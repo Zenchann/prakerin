@@ -43,14 +43,14 @@
 <script>
 $(document).ready(function() {
     // CSRF
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+    // $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    // });
     $('#datatable').dataTable({
         dataType: "json",
-        ajax: "{{ route('admin.json_tag') }}",
+        ajax: "{{ route('json_tag') }}",
         // serverSide:true,
         responsive:true,
         columns: [

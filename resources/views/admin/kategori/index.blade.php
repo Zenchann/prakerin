@@ -50,7 +50,7 @@ $(document).ready(function() {
     });
     $('#datatable').dataTable({
         dataType: "json",
-        ajax: "{{ route('admin.json_kategori') }}",
+        ajax: "{{ route('json_kategori') }}",
         // serverSide:true,
         responsive:true,
         columns: [
