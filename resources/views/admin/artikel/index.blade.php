@@ -39,7 +39,7 @@
         </div>
     </div>
 </div>
-@include('artikel.create')
+@include('admin.artikel.create')
 @endsection
 
 @push('scripts')
@@ -53,7 +53,7 @@ $(document).ready(function() {
     });
     $('#datatable').dataTable({
         dataType: "json",
-        ajax: "{{ route('admin.json_artikel') }}",
+        ajax: "{{ route('api.json_artikel') }}",
         // serverSide:true,
         responsive:true,
         columns: [

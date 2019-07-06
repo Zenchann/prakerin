@@ -50,7 +50,7 @@ $(document).ready(function() {
     // });
     $('#datatable').dataTable({
         dataType: "json",
-        ajax: "{{ route('json_tag') }}",
+        ajax: "{{ route('api.json_tag') }}",
         // serverSide:true,
         responsive:true,
         columns: [
