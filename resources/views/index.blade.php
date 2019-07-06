@@ -79,7 +79,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li class="active"><a href="catagory.html">Top 10</a></li>
+                                    <li class="active"><a href="catagory.html">Beranda</a></li>
                                     <li><a href="#">Pages</a>
                                         <ul class="dropdown">
                                             <li><a href="index.html">Home</a></li>
