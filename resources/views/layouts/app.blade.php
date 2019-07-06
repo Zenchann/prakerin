@@ -16,7 +16,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/backend/datatables/css/dataTables.bootstrap4.min.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/backend/DataTables/css/dataTables.bootstrap4.min.css')}}" />
     @yield('css')
     @stack('styles')
 </head>
@@ -87,8 +87,8 @@
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('assets/backend/datatables/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{ asset('assets/backend/datatables/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{ asset('assets/backend/DataTables/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('assets/backend/DataTables/js/dataTables.bootstrap4.min.js')}}"></script>
     @yield('js')
     @stack('scripts')
 </body>
