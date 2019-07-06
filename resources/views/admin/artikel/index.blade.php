@@ -45,7 +45,6 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
-    // CSRF
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -54,7 +53,6 @@ $(document).ready(function() {
     $('#datatable').dataTable({
         dataType: "json",
         ajax: "{{ route('api.json_artikel') }}",
-        // serverSide:true,
         responsive:true,
         columns: [
                 { data: 'judul', name: 'judul' },

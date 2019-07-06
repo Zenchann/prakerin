@@ -42,16 +42,14 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
-    // CSRF
-    // $.ajaxSetup({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     }
-    // });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $('#datatable').dataTable({
         dataType: "json",
         ajax: "{{ route('api.json_tag') }}",
-        // serverSide:true,
         responsive:true,
         columns: [
                 { data: 'nama_tag', name: 'nama_tag' },
