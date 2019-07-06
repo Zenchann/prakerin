@@ -15,6 +15,12 @@ class CreateArtikelsTable extends Migration
     {
         Schema::create('artikels', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('judul');
+            $table->string('slug');
+            $table->string('foto');
+            $table->text('deskripsi');
+            $table->unsignedInteger('kategori_id');
+            $table->unsignedInteger('user_id');
             $table->timestamps();
         });
     }

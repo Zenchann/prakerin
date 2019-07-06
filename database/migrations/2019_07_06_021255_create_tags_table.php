@@ -15,7 +15,15 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nama_tag');
+            $table->string('slug');
             $table->timestamps();
+        });
+
+        Schema::create('artikel_tag', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('id_tag');
+            $table->unsignedInteger('id_artikel');
         });
     }
 
@@ -27,5 +35,6 @@ class CreateTagsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tags');
+        Schema::dropIfExists('artikel_tag');
     }
 }
