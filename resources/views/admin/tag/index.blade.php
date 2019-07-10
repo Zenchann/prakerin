@@ -7,21 +7,21 @@
             <div class="card">
                 <div class="card-header">
                     Tag Artikel
-                    <a href="javascript:void(0)" class="btn btn-primary btn-sm float-right modal-show" id="tambahKategori">
+                    <button type="button" class="btn-sm btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
                         Tambah Data
-                    </a>
+                    </button>
                 </div>
 
                 <div class="card-body">
                     <center>
-                        @include('admin.kategori.create')
+                        @include('admin.tag.create')
                     </center>
                     <br>
                     <div class="table-responsive">
                         <table id="datatable" class="table">
                             <thead>
                                 <tr>
-                                    <th>Nama Kategori</th>
+                                    <th>Nama tag</th>
                                     <th>Slug</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -36,7 +36,7 @@
         </div>
     </div>
 </div>
-@include('admin.kategori.create')
+@include('admin.tag.create')
 @endsection
 
 @push('scripts')
@@ -55,12 +55,55 @@ $(document).ready(function() {
                 { data: 'nama_tag', name: 'nama_tag' },
                 { data: 'slug', name: 'slug' },
                 { data: 'id', render : function (id) {
-                    return  '<a class="btn btn-warning btn-sm" onclick="kategoritEdit('+id+')" id="kategoritEdit">Edit</a>'+
-                        ' <a class="btn btn-danger btn-sm" onclick="kategoritDelete('+id+')" id="kategoritDelete">Hapus</a>';
+                    return `<a class="btn btn-warning btn-sm" id="kategoritEdit">Edit</a>
+                            <a class="btn btn-danger btn-sm hapus-data" data-id="${id}">Hapus</a>`;
                     }
                 }
             ]
-        });
+    });
+
+    // Store Data
+    $(".tombol-simpan").click(function (simpan) {
+        simpan.preventDefault();
+        var nama_tag = $("input[name=nama_tag]").val();
+        // console.log(nama_tag)
+        $.ajax({
+            url: "{{ route('admin.tag.store') }}",
+            method: "POST",
+            dataType: "json",
+            data: {
+                nama_tag: nama_tag,
+            },
+            success: function (berhasil) {
+                alert(berhasil.message)
+                location.reload();
+            },
+            error: function (gagal) {
+                console.log(gagal)
+            }
+        })
+    });
+
+    // Delete Data
+    $("#datatable").on('click', '.hapus-data', function () {
+        var id = $(this).data("id");
+        // alert(id)
+        $.ajax({
+            url: '/admin/tag/'+id,
+            method: "DELETE",
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: function (berhasil) {
+                alert(berhasil.message)
+                location.reload();
+            },
+            error: function (gagal) {
+                console.log(gagal)
+            }
+        })
+    })
 });
 </script>
 @endpush

@@ -42,7 +42,16 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tag = new tag;
+        $tag->nama_tag = $request->nama_tag;
+        $tag->slug = str_slug($request->nama_tag);
+        $tag->save();
+        $response = [
+            'success' => true,
+            'data' => $tag,
+            'message' => 'berhasil'
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -87,6 +96,12 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::findOrFail($id)->delete();
+        $response = [
+            'success' => true,
+            'data' => $tag,
+            'message' => 'berhasil'
+        ];
+        return response()->json($response, 200);
     }
 }
