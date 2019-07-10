@@ -47,7 +47,16 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kategori = new Kategori;
+        $kategori->nama_kategori = $request->nama_kategori;
+        $kategori->slug = str_slug($request->nama_kategori);
+        $kategori->save();
+        $response = [
+            'success' => true,
+            'data' => $kategori,
+            'message' => 'berhasil'
+        ];
+        return response()->json($response, 200);
     }
 
     /**
@@ -92,6 +101,12 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id)->delete();
+        $response = [
+            'success' => true,
+            'data' => $kategori,
+            'message' => 'berhasil'
+        ];
+        return response()->json($response, 200);
     }
 }

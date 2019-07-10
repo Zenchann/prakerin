@@ -21,11 +21,12 @@
                         <table id="datatable" class="table">
                             <thead>
                                 <tr>
-                                    <th>Nama artikel</th>
+                                    <th>Judul</th>
                                     <th>Slug</th>
                                     <th>Kategori</th>
                                     <th>Penulis</th>
-                                    <th>Slug</th>
+                                    {{-- <th>Tag</th> --}}
+                                    <th>Foto</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -59,6 +60,7 @@ $(document).ready(function() {
                 { data: 'slug', name: 'slug' },
                 { data: 'kategori.nama_kategori', name: 'kategori.nama_kategori' },
                 { data: 'user.name', name: 'user.name' },
+                // { data: 'data["nama_tag"]', name:'tag["nama_tag"]' },
                 { data: 'foto', render :  function(foto){
                         return '<img src="'+foto+'" style="width:150px;" alt="foto">';
                     }

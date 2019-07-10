@@ -4,13 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Ahmad Candra</title>
+    <title>Viral Story - Viral News Magazine Template</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/frontend/img/core-img/favicon.ico')}}">
@@ -80,7 +79,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li class="active"><a href="catagory.html">Beranda</a></li>
+                                    <li class="active"><a href="catagory.html">Top 10</a></li>
                                     <li><a href="#">Pages</a>
                                         <ul class="dropdown">
                                             <li><a href="index.html">Home</a></li>
@@ -164,194 +163,59 @@
     </header>
     <!-- ##### Header Area End ##### -->
 
-    <!-- ##### Hero Area Start ##### -->
-    <div class="hero-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="hero-slides owl-carousel">
-                        <!-- Single Blog Post -->
-                        <div class="single-blog-post d-flex align-items-center mb-50">
-                            <div class="post-thumb">
-                                <a href="#"><img src="{{ asset('assets/frontend/img/bg-img/1.jpg')}}" alt=""></a>
-                            </div>
-                            <div class="post-data">
-                                <a href="#" class="post-title">
-                                    <h6>Man Rescued Injured Bird, And Now He Probably Wishes He Hadn’t</h6>
-                                </a>
-                                <div class="post-meta">
-                                    <p class="post-date"><a href="#">2 Days Ago</a></p>
-                                </div>
-                            </div>
-                        </div>
+    <!-- ##### Viral News Breadcumb Area Start ##### -->
+    <div class="viral-news-breadcumb-area section-padding-50">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
 
-                        <!-- Single Blog Post -->
-                        <div class="single-blog-post d-flex align-items-center mb-50">
-                            <div class="post-thumb">
-                                <a href="#"><img src="{{ asset('assets/frontend/img/bg-img/2.jpg')}}" alt=""></a>
-                            </div>
-                            <div class="post-data">
-                                <a href="#" class="post-title">
-                                    <h6>This 76-year-old Grandmother Lives Alone In Siberia And Skates</h6>
-                                </a>
-                                <div class="post-meta">
-                                    <p class="post-date"><a href="#">3 Days Ago</a></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Blog Post -->
-                        <div class="single-blog-post d-flex align-items-center mb-50">
-                            <div class="post-thumb">
-                                <a href="#"><img src="{{ asset('assets/frontend/img/bg-img/3.jpg')}}" alt=""></a>
-                            </div>
-                            <div class="post-data">
-                                <a href="#" class="post-title">
-                                    <h6>Mother Saves Her Daughter During A Talent Show, And Now Everyone Is Crying</h6>
-                                </a>
-                                <div class="post-meta">
-                                    <p class="post-date"><a href="#">2 Days Ago</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Breadcumb Area -->
+                <div class="col-12 col-md-4">
+                    <h3>Articles</h3>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Trending</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Articles</li>
+                        </ol>
+                    </nav>
                 </div>
 
-            </div>
-        </div>
-    </div>
-    <!-- ##### Hero Area End ##### -->
-
-    <!-- ##### Welcome Slide Area Start ##### -->
-    <div class="welcome-slide-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="welcome-slides owl-carousel">
-
-                        <!-- Single Welcome Slide -->
-                        <div class="single-welcome-slide">
-                            <div class="row no-gutters">
-                                <div class="col-12 col-lg-8">
-                                    <!-- Welcome Post -->
-                                    <div class="welcome-post">
-                                        <img src="{{ asset('assets/frontend/img/bg-img/bg1.jpg')}}" alt="">
-                                        <div class="post-content" data-animation="fadeInUp" data-duration="500ms">
-                                            <a href="#" class="tag">Travel</a>
-                                            <a href="#" class="post-title">10 Tips to travel in style for less</a>
-                                            <p>1 day ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-lg-4">
-                                    <div class="welcome-posts--">
-                                        <!-- Welcome Post -->
-                                        <div class="welcome-post style-2">
-                                            <img src="{{ asset('assets/frontend/img/bg-img/bg2.jpg')}}" alt="">
-                                            <div class="post-content" data-animation="fadeInUp" data-delay="500ms" data-duration="500ms">
-                                                <a href="#" class="tag tag-2">Celebs</a>
-                                                <a href="#" class="post-title">Superstar spoted with new boyfriend</a>
-                                                <p>1 day ago</p>
-                                            </div>
-                                        </div>
-
-                                        <!-- Welcome Post -->
-                                        <div class="welcome-post style-2">
-                                            <img src="{{ asset('assets/frontend/img/bg-img/bg3.jpg')}}" alt="">
-                                            <div class="post-content" data-animation="fadeInUp" data-delay="750ms" data-duration="500ms">
-                                                <a href="#" class="tag tag-3">4 Fun</a>
-                                                <a href="#" class="post-title">Festival looks for all the party people</a>
-                                                <p>1 day ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Single Welcome Slide -->
-                        <div class="single-welcome-slide">
-                            <div class="row no-gutters">
-                                <div class="col-12 col-lg-8">
-                                    <!-- Welcome Post -->
-                                    <div class="welcome-post">
-                                        <img src="{{ asset('assets/frontend/img/bg-img/bg1.jpg')}}" alt="">
-                                        <div class="post-content" data-animation="fadeInUp" data-duration="500ms">
-                                            <a href="#" class="tag">Travel</a>
-                                            <a href="#" class="post-title">10 Tips to travel in style for less</a>
-                                            <p>1 day ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-lg-4">
-                                    <div class="welcome-posts--">
-                                        <!-- Welcome Post -->
-                                        <div class="welcome-post style-2">
-                                            <img src="{{ asset('assets/frontend/img/bg-img/bg2.jpg')}}" alt="">
-                                            <div class="post-content" data-animation="fadeInUp" data-delay="500ms" data-duration="500ms">
-                                                <a href="#" class="tag tag-2">Celebs</a>
-                                                <a href="#" class="post-title">Superstar spoted with new boyfriend</a>
-                                                <p>1 day ago</p>
-                                            </div>
-                                        </div>
-
-                                        <!-- Welcome Post -->
-                                        <div class="welcome-post style-2">
-                                            <img src="{{ asset('assets/frontend/img/bg-img/bg3.jpg')}}" alt="">
-                                            <div class="post-content" data-animation="fadeInUp" data-delay="750ms" data-duration="500ms">
-                                                <a href="#" class="tag tag-3">4 Fun</a>
-                                                <a href="#" class="post-title">Festival looks for all the party people</a>
-                                                <p>1 day ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                <!-- Add Widget -->
+                <div class="col-12 col-md-8">
+                    <div class="add-widget">
+                        <a href="#"><img src="{{ asset('assets/frontend/img/bg-img/add2.png')}}" alt=""></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ##### Welcome Slide Area End ##### -->
+    <!-- ##### Viral News Breadcumb Area End ##### -->
 
-    <!-- ##### Blog Post Area Start ##### -->
-    <div class="viral-story-blog-post section-padding-0-50">
+    <!-- ##### Blog Area Start ##### -->
+    <div class="blog-area section-padding-100">
         <div class="container">
             <div class="row">
-                <!-- Blog Posts Area -->
                 <div class="col-12 col-lg-8">
-                    <div class="row" id="article-post">
-                    </div>
+                    <div class="blog-posts-area">
 
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="viral-news-pagination">
-                                <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">01</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">04</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">05</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">15</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
+                        <!-- Single Featured Post -->
+                        <div class="single-blog-post-details" id="singleblog">
+                        </div>
+
+                        <!-- Related Articles Area -->
+
+                        <!-- Comment Area Start -->
+
+                        <div class="post-a-comment-area">
+                            <br>
+                            <h4 class="mb-70">Leave a comment</h4>
+                            <div id="disqus_thread"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sidebar Area -->
                 <div class="col-12 col-lg-4">
-                    <div class="sidebar-area">
+                    <div class="blog-sidebar-area">
 
                         <!-- Newsletter Widget -->
                         <div class="newsletter-widget mb-70">
@@ -366,59 +230,17 @@
                         <!-- Trending Articles Widget -->
                         <div class="treading-articles-widget mb-70">
                             <h4>Trending Articles</h4>
-                            <div class="row" id="article-trending"></div>
-
+                            <div id="article-trending"></div>
                         </div>
 
-                        <!-- Add Widget -->
-                        <div class="add-widget mb-70">
-                            <a href="#"><img src="{{ asset('assets/frontend/img/bg-img/add.png')}}" alt=""></a>
-                        </div>
 
                         <!-- Latest Comments -->
-                        <div class="latest-comments-widget">
-                            <h4>Latest Comments</h4>
-
-                            <!-- Single Comment Widget -->
-                            <div class="single-comments d-flex">
-                                <div class="comments-thumbnail">
-                                    <img src="{{ asset('assets/frontend/img/bg-img/t1.jpg')}}" alt="">
-                                </div>
-                                <div class="comments-text">
-                                    <a href="#"><span>Jamie Smith</span> on Facebook is offering facial recognition...</a>
-                                    <p>06:34 am, April 14, 2018</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Comment Widget -->
-                            <div class="single-comments d-flex">
-                                <div class="comments-thumbnail">
-                                    <img src="{{ asset('assets/frontend/img/bg-img/t2.jpg')}}" alt="">
-                                </div>
-                                <div class="comments-text">
-                                    <a href="#"><span>Tania Heffner</span> on Facebook is offering facial recognition...</a>
-                                    <p>06:34 am, April 14, 2018</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Comment Widget -->
-                            <div class="single-comments d-flex">
-                                <div class="comments-thumbnail">
-                                    <img src="{{ asset('assets/frontend/img/bg-img/t3.jpg')}}" alt="">
-                                </div>
-                                <div class="comments-text">
-                                    <a href="#"><span>Sandy Doe</span> on Facebook is offering facial recognition...</a>
-                                    <p>06:34 am, April 14, 2018</p>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ##### Blog Post Area End ##### -->
+    <!-- ##### Blog Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
@@ -551,7 +373,27 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{{ asset('assets/frontend/js/plugins/plugins.js')}}"></script>
     <!-- Active js -->
     <script src="{{ asset('assets/frontend/js/active.js')}}"></script>
+    <script src="{{ asset('assets/frontend/js/single-blog.js')}}"></script>
     <script src="{{ asset('assets/frontend/js/index.js')}}"></script>
+    <script>
+
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://prakerin-2.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+            </script>
+            <a>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></a>
 </body>
 
 </html>

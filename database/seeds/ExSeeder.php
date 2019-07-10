@@ -7,6 +7,7 @@ use Faker\Factory as Faker;
 use App\Kategori;
 use App\Tag;
 use App\Artikel;
+// use DB;
 
 class ExSeeder extends Seeder
 {
@@ -17,6 +18,13 @@ class ExSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('artikels')->delete();
+        DB::table('users')->delete();
+        DB::table('kategoris')->delete();
+        DB::table('siswas')->delete();
+        DB::table('tags')->delete();
+        DB::table('artikel_tag')->delete();
+
         User::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
@@ -53,7 +61,7 @@ class ExSeeder extends Seeder
             $tag->save();
         }
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $artikel = new Artikel();
             $artikel->judul = $faker->sentence($nbWords = 6, $variableNbWords = true);
             $artikel->slug = $faker->slug;

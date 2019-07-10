@@ -7,9 +7,9 @@
             <div class="card">
                 <div class="card-header">
                     Kategori Artikel
-                    <a href="javascript:void(0)" class="btn btn-primary btn-sm float-right modal-show" id="tambahKategori">
+                    <button type="button" class="btn-sm btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
                         Tambah Data
-                    </a>
+                    </button>
                 </div>
 
                 <div class="card-body">
@@ -55,12 +55,55 @@ $(document).ready(function() {
                 { data: 'nama_kategori', name: 'nama_kategori' },
                 { data: 'slug', name: 'slug' },
                 { data: 'id', render : function (id) {
-                    return  '<a class="btn btn-warning btn-sm" onclick="kategoritEdit('+id+')" id="kategoritEdit">Edit</a>'+
-                        ' <a class="btn btn-danger btn-sm" onclick="kategoritDelete('+id+')" id="kategoritDelete">Hapus</a>';
+                    return `<a class="btn btn-warning btn-sm" id="kategoritEdit">Edit</a>
+                            <a class="btn btn-danger btn-sm hapus-data" data-id="${id}">Hapus</a>`;
                     }
                 }
             ]
         });
+        // Store Data
+        $(".tombol-simpan").click(function (simpan) {
+        simpan.preventDefault();
+        var nama_kategori = $("input[name=nama_kategori]").val();
+        // console.log(nama_kategori)
+        $.ajax({
+            url: "{{ route('admin.kategori.store') }}",
+            method: "POST",
+            dataType: "json",
+            data: {
+                nama_kategori: nama_kategori,
+            },
+            success: function (berhasil) {
+                alert(berhasil.message)
+                location.reload();
+            },
+            error: function (gagal) {
+                console.log(gagal)
+            }
+        })
+    });
+
+    // Delete Data
+    $("#datatable").on('click', '.hapus-data', function () {
+        var id = $(this).data("id");
+        // alert(id)
+        $.ajax({
+            url: '/admin/kategori/'+id,
+            method: "DELETE",
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: function (berhasil) {
+                alert(berhasil.message)
+                location.reload();
+            },
+            error: function (gagal) {
+                console.log(gagal)
+            }
+        })
+    })
+
 });
 </script>
 @endpush

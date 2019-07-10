@@ -14,9 +14,13 @@
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/contact', function () {
-    return view('contact');
+
+Route::get('siswa', function () {
+    return view('siswa');
 });
+
+
+Route::get('/blog/{artikel}', 'FrontController@singleblog');
 
 Auth::routes();
 

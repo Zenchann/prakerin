@@ -9,7 +9,7 @@ class ArtikelController extends Controller
 {
     public function getjson()
     {
-        $artikel = Artikel::with('kategori', 'user')->get();
+        $artikel = Artikel::with('kategori', 'user', 'tag')->get();
         $response = [
             'success' => true,
             'data' => $artikel,
