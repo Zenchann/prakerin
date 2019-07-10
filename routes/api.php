@@ -17,15 +17,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::group(
-//     ['as' => 'api.', 'middleware' => ['cors']],
-//     function () {
-// Json
-Route::get('kategori', 'KategoriController@getjson')->name('json_kategori');
-Route::get('artikel', 'ArtikelController@getjson')->name('json_artikel');
-Route::get('tag', 'TagController@getjson')->name('json_tag');
-Route::get('front', 'Api\FrontController@index')->name('json_front');
-Route::get('blog/{artikel}', 'Api\FrontController@singleblog')->name('json_singleblog');
-Route::resource('siswa', 'Api\SiswaController');
-//     }
-// );
+Route::group(
+    ['as' => 'api.'],
+    function () {
+        // Json
+        Route::get('kategori', 'KategoriController@getjson')->name('json_kategori');
+        Route::get('artikel', 'ArtikelController@getjson')->name('json_artikel');
+        Route::get('tag', 'TagController@getjson')->name('json_tag');
+        Route::get('front', 'Api\FrontController@index')->name('json_front');
+        Route::get('blog/{artikel}', 'Api\FrontController@singleblog')->name('json_singleblog');
+        Route::resource('siswa', 'Api\SiswaController');
+    }
+);
