@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(
-    ['as' => 'api.'],
+    ['middleware' => 'cors', 'as' => 'api.'],
     function () {
         // Json
         Route::get('kategori', 'KategoriController@getjson')->name('json_kategori');
