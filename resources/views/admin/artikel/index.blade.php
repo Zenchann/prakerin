@@ -7,9 +7,9 @@
             <div class="card">
                 <div class="card-header">
                     Artikel
-                    <a href="javascript:void(0)" class="btn btn-primary btn-sm float-right modal-show" id="tambahartikel">
+                    <button type="button" class="btn-sm btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
                         Tambah Data
-                    </a>
+                    </button>
                 </div>
 
                 <div class="card-body">
@@ -71,6 +71,48 @@ $(document).ready(function() {
                     }
                 }
             ]
+        });
+
+        // Get Kategori
+        $.ajax({
+            url: '/api/kategori',
+            method: "GET",
+            dataType: "json",
+            success: function (berhasil) {
+                console.log(berhasil)
+                $.each(berhasil.data, function (key, value) {
+                    $("#kategori").append(
+                        `
+                            <option value="${value.id}">${value.nama_kategori}</option>
+                        `
+                    )
+                })
+            },
+            error: function () {
+                console.log('data tidak ada');
+            }
+        });
+
+        // Get Tag
+        $('.tag').select2({
+        });
+        $.ajax({
+            url: '/api/tag',
+            method: "GET",
+            dataType: "json",
+            success: function (berhasil) {
+                console.log(berhasil)
+                $.each(berhasil.data, function (key, value) {
+                    $(".tag").append(
+                        `
+                        <option value="${value.id}">${value.nama_tag}</option>
+                        `
+                    )
+                })
+            },
+            error: function () {
+                console.log('data tidak ada');
+            }
         });
 });
 </script>

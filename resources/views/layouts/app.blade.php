@@ -17,6 +17,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/backend/DataTables/css/dataTables.bootstrap4.min.css')}}" />
+    <link rel="stylesheet" href="{{ asset('assets/backend/select2/dist/css/select2.min.css') }}">
     @yield('css')
     @stack('styles')
 </head>
@@ -93,6 +94,11 @@
     {{-- <script src="{{ asset('js/siswa.js') }}"></script> --}}
     <script src="{{ asset('assets/backend/DataTables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('assets/backend/DataTables/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{ asset('assets/backend/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('assets/backend/select2/dist/js/select2.min.js') }}"></script>
+    <script>
+        CKEDITOR.replace('texteditor');
+    </script>
     @yield('js')
     @stack('scripts')
 </body>
