@@ -67,8 +67,9 @@ $(document).ready(function() {
                 { data: 'slug', name: 'slug' },
                 { data: 'kategori.nama_kategori', name: 'kategori.nama_kategori' },
                 { data: 'user.name', name: 'user.name' },
-                { data: 'tag[].nama_tag', render :  function(nama_tag){
-                        return `${nama_tag}`
+                { data: 'tag', render :  function(tag){
+                    console.log(tag)
+
                     }
                 },
                 { data: 'foto', render :  function(foto){

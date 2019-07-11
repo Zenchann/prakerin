@@ -26,5 +26,6 @@ Route::group(
         Route::get('front', 'Api\FrontController@index')->name('json_front');
         Route::get('blog/{artikel}', 'Api\FrontController@singleblog')->name('json_singleblog');
         Route::resource('artikel', 'ArtikelController');
+        Route::resource('/produk', 'Api\ProdukController');
     }
 );
