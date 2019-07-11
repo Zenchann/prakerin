@@ -25,7 +25,7 @@
                                     <th>Slug</th>
                                     <th>Kategori</th>
                                     <th>Penulis</th>
-                                    {{-- <th>Tag</th> --}}
+                                    <th>Tag</th>
                                     <th>Foto</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -53,16 +53,19 @@ $(document).ready(function() {
     });
     $('#datatable').dataTable({
         dataType: "json",
-        ajax: "{{ route('api.json_artikel') }}",
+        ajax: "/api/artikel",
         responsive:true,
         columns: [
                 { data: 'judul', name: 'judul' },
                 { data: 'slug', name: 'slug' },
                 { data: 'kategori.nama_kategori', name: 'kategori.nama_kategori' },
                 { data: 'user.name', name: 'user.name' },
-                // { data: 'data["nama_tag"]', name:'tag["nama_tag"]' },
+                { data: 'tag[].nama_tag', render :  function(nama_tag){
+                        return `${nama_tag}`
+                    }
+                },
                 { data: 'foto', render :  function(foto){
-                        return '<img src="'+foto+'" style="width:150px;" alt="foto">';
+                        return '<img src="/assets/img/fotoartikel/'+foto+'" style="width:150px; height:100px;" alt="foto">';
                     }
                 },
                 { data: 'id', render : function (id) {
@@ -94,8 +97,7 @@ $(document).ready(function() {
         });
 
         // Get Tag
-        $('.tag').select2({
-        });
+        $('.tag').select2({});
         $.ajax({
             url: '/api/tag',
             method: "GET",
@@ -114,6 +116,31 @@ $(document).ready(function() {
                 console.log('data tidak ada');
             }
         });
+
+        // Store Data
+        $('#createData').submit(function(e){
+        var formData    = new FormData($('#createData')[0]);
+        e.preventDefault();
+        $.ajax({
+            url: '/api/artikel',
+            type:'POST',
+            data:formData,
+            cache: true,
+            contentType: false,
+            processData: false,
+            async:false,
+            dataType: 'json',
+            success:function(formData){
+                $('#exampleModal').modal('hide');
+                $('#datatable').DataTable().ajax.reload();
+                alert(formData.message)
+            },
+            complete: function() {
+                $("#indexKategori").show();
+                $("#createData")[0].reset();
+            }
+        });
+    });
 });
 </script>
 @endpush

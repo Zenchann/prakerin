@@ -12,7 +12,7 @@ class KategoriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getjson()
+    public function index()
     {
         $kategori = Kategori::all();
         $response = [
@@ -23,7 +23,7 @@ class KategoriController extends Controller
         return response()->json($response, 200);
     }
 
-    public function index()
+    public function json()
     {
 
         return view('admin.kategori.index');
@@ -67,7 +67,13 @@ class KategoriController extends Controller
      */
     public function show($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $response = [
+            'success' => true,
+            'data' => $kategori,
+            'message' => 'berhasil'
+        ];
+        return response()->json($response, 200);
     }
 
     /**

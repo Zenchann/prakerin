@@ -1,21 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container kategori" id="indexKategori">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     Kategori Artikel
-                    <button type="button" class="btn-sm btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn-sm btn btn-primary float-right" id="changeViewKategori">
                         Tambah Data
                     </button>
                 </div>
 
-                <div class="card-body">
-                    <center>
-                        @include('admin.kategori.create')
-                    </center>
+                <div class="card-body" >
                     <br>
                     <div class="table-responsive">
                         <table id="datatable" class="table">
@@ -37,58 +34,141 @@
     </div>
 </div>
 @include('admin.kategori.create')
+@include('admin.kategori.edit')
 @endsection
 
 @push('scripts')
+{{-- CSRF --}}
 <script>
-$(document).ready(function() {
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     });
+</script>
+{{-- End CSRF --}}
+
+{{-- Get Index Data --}}
+<script>
+    // Index Data
     $('#datatable').dataTable({
         dataType: "json",
-        ajax: "{{ route('api.json_kategori') }}",
+        ajax: {
+                url: '/api/kategori/',
+                dataType: "json",
+                type: "GET",
+                stateSave : true,
+                serverSide: true,
+                processing: true,
+        },
         responsive:true,
         columns: [
                 { data: 'nama_kategori', name: 'nama_kategori' },
                 { data: 'slug', name: 'slug' },
                 { data: 'id', render : function (id) {
-                    return `<a class="btn btn-warning btn-sm" id="kategoritEdit">Edit</a>
-                            <a class="btn btn-danger btn-sm hapus-data" data-id="${id}">Hapus</a>`;
+                    return `
+                    <a class="btn btn-success btn-sm" onclick="kategoriEdit(${id})" id="kategoriEdit">Edit</a>
+                    <a class="btn btn-danger btn-sm hapus-data" data-id="${id}">Hapus</a>
+                    `;
                     }
                 }
             ]
         });
-        // Store Data
-        $(".tombol-simpan").click(function (simpan) {
-        simpan.preventDefault();
-        var nama_kategori = $("input[name=nama_kategori]").val();
-        // console.log(nama_kategori)
-        $.ajax({
-            url: "{{ route('admin.kategori.store') }}",
-            method: "POST",
-            dataType: "json",
-            data: {
-                nama_kategori: nama_kategori,
-            },
-            success: function (berhasil) {
-                alert(berhasil.message)
-                location.reload();
-            },
-            error: function (gagal) {
-                console.log(gagal)
-            }
-        })
-    });
+</script>
+{{-- End Index --}}
 
+{{-- Create Form & Store Data --}}
+<script>
+    // Store Data
+    $('#createData').submit(function(e){
+        var formData    = new FormData($('#createData'));
+        e.preventDefault();
+        $.ajax({
+            url: "/api/kategori",
+            type:'POST',
+            data:formData,
+            cache: true,
+            contentType: false,
+            processData: false,
+            async:false,
+            dataType: 'json',
+            success:function(formData){
+                $('#createFormKategori').hide();
+                alert(formData.message)
+                $('#datatable').DataTable().ajax.reload();
+            },
+            complete: function() {
+                $("#indexKategori").show();
+                $("#createData")[0].reset();
+            }
+        });
+    });
+</script>
+{{-- end Create Form & Store Data --}}
+
+<script>
+
+    // get Edit Form
+    function kategoriEdit(id)
+    {
+        console.log(id);
+        // var dataUrl=$('.barangEdit').data('id-url');
+        $('.kategori').hide();
+        $('.kategoriEdit').show().attr('hidden', false);
+        $.ajax({
+            url: '/api/kategori/'+id,
+            type:'get',
+            cache: true,
+            contentType: false,
+            processData: false,
+            async:false,
+            dataType: 'json',
+            success:function(data){
+            console.log(data.data.nama_kategori);
+            $('input#id').val(data.id);
+            $('input#nama_kategori').val(data.data.nama_kategori);
+            },
+            complete: function() {
+                // $('#indexkategori').attr('hidden', false);
+            }
+        });
+    }
+</script>
+
+<script>
+    $('.myFormEdit').submit(function(e){
+        var formData    = new FormData($('.myFormEdit')[0]);
+        var id = formData.get('id');
+        e.preventDefault();
+        $.ajax({
+            url: '/api/kategori/'+id,
+            type:'post',
+            data:formData,
+            cache: true,
+            contentType: false,
+            processData: false,
+            async:false,
+            dataType: 'json',
+            success:function(respone){
+                $('.kategoriEdit').hide();
+                $('#datatable').DataTable().ajax.reload();
+            },
+            complete: function() {
+                $('#indexKategori').show();
+            }
+        });
+    });
+</script>
+
+<script>
     // Delete Data
     $("#datatable").on('click', '.hapus-data', function () {
         var id = $(this).data("id");
         // alert(id)
         $.ajax({
-            url: '/admin/kategori/'+id,
+            url: '/api/kategori/'+id,
             method: "DELETE",
             dataType: "json",
             data: {
@@ -96,14 +176,12 @@ $(document).ready(function() {
             },
             success: function (berhasil) {
                 alert(berhasil.message)
-                location.reload();
+                $('#datatable').DataTable().ajax.reload();
             },
             error: function (gagal) {
                 console.log(gagal)
             }
         })
     })
-
-});
 </script>
 @endpush

@@ -38,13 +38,13 @@
                         @guest
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.kategori.index') }}">Kategori</a>
+                            <a class="nav-link" href="{{ url('kategori') }}">Kategori</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.artikel.index') }}">Artikel</a>
+                            <a class="nav-link" href="{{ url('artikel') }}">Artikel</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.tag.index') }}">Tag</a>
+                            <a class="nav-link" href="{{ url('tag') }}">Tag</a>
                         </li>
                         @endguest
                     </ul>
@@ -91,6 +91,7 @@
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/global.js') }}"></script>
     {{-- <script src="{{ asset('js/siswa.js') }}"></script> --}}
     <script src="{{ asset('assets/backend/DataTables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('assets/backend/DataTables/js/dataTables.bootstrap4.min.js')}}"></script>

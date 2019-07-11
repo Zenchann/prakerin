@@ -7,10 +7,11 @@ use App\Artikel;
 use App\Tag;
 use App\Kategori;
 use File;
+use Auth;
 
 class ArtikelController extends Controller
 {
-    public function getjson()
+    public function index()
     {
         $artikel = Artikel::with('kategori', 'user', 'tag')->get();
         $response = [
@@ -21,7 +22,7 @@ class ArtikelController extends Controller
         return response()->json($response, 200);
     }
 
-    public function index()
+    public function view()
     {
         $kategori = Kategori::all();
         $tag = Tag::all();
@@ -42,13 +43,12 @@ class ArtikelController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user()->id;
         $artikel = new Artikel;
         $artikel->judul = $request->judul;
         $artikel->deskripsi = $request->deskripsi;
-        $artikel->slug = str_slug($request->judul, '-') . '-' . str_random(6);
+        $artikel->slug = str_slug($request->judul);
         $artikel->kategori_id = $request->kategori_id;
-        $artikel->user_id = $user;
+        $artikel->user_id = $request->user_id;
         $artikel->foto = $request->foto;
         // $artikel->publish = $request->publish;
         //upload foto

@@ -8,6 +8,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <form method="post" id="createData" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Judul</label>
@@ -15,7 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label><left>Deskripsi</left></label>
-                        <textarea type="text" id="texteditor" name="deskripsi" class="form-control" required> </textarea>
+                        <textarea name="deskripsi" id="texteditor" class="form-control" required> </textarea>
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
@@ -35,8 +38,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary tombol-simpan">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>
