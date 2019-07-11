@@ -99,7 +99,10 @@
         });
     });
 
-    /
+    // Edit Data
+    function Edit(id){
+
+    }
     // Hapus Data
     $(".table").on('click', '#hapus-data', function () {
         var id = $(this).data("id");
