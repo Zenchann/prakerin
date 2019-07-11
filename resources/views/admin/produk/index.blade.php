@@ -58,8 +58,9 @@
                                 <button type="button" class="btn btn-sm btn-success edit-produk"
                                 data-target="#modalEdit"
                                 data-toggle="modal"
+                                data-nama="${value.judul}"
+                                data-harga="${value.konten}"
                                 data-id="${value.id}"
-                                onclick="Edit(${id})"
                                 >Edit</button>
                                 <button class="btn btn-sm btn-danger" data-id="${value.id}" id="hapus-data">Hapus</button>
                             </td>
@@ -98,7 +99,7 @@
         });
     });
 
-
+    /
     // Hapus Data
     $(".table").on('click', '#hapus-data', function () {
         var id = $(this).data("id");

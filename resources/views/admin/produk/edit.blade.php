@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Produk</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Produk</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -11,6 +11,7 @@
             <form id="editData" method="POST">
             <div class="modal-body">
                 <input type="hidden" id="id">
+                @method('PUT')
                     @csrf
                 <div class="form-group">
                     <label for="">Nama Produk</label>
