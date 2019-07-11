@@ -53,7 +53,14 @@ $(document).ready(function() {
     });
     $('#datatable').dataTable({
         dataType: "json",
-        ajax: "/api/artikel",
+        ajax: {
+                url: '/api/artikel/',
+                dataType: "json",
+                type: "GET",
+                stateSave : true,
+                serverSide: true,
+                processing: true,
+        },
         responsive:true,
         columns: [
                 { data: 'judul', name: 'judul' },
