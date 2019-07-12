@@ -91,7 +91,7 @@
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-
+    <script src="{{ asset('js/produk.js') }}"></script>
     <script src="{{ asset('js/global.js') }}"></script>
     {{-- <script src="{{ asset('js/siswa.js') }}"></script> --}}
     <script src="{{ asset('assets/backend/DataTables/js/jquery.dataTables.min.js')}}"></script>
