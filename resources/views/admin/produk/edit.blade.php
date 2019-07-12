@@ -10,8 +10,8 @@
             </div>
             <form id="editData" method="POST">
             <div class="modal-body">
-                <input type="hidden" id="id">
-                @method('PUT')
+                <input type="hidden" name="id" id="id">
+                <input type="hidden" name="_method" value="PATCH" id="">
                     @csrf
                 <div class="form-group">
                     <label for="">Nama Produk</label>

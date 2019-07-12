@@ -58,11 +58,11 @@
                                 <button type="button" class="btn btn-sm btn-success edit-produk"
                                 data-target="#modalEdit"
                                 data-toggle="modal"
-                                data-nama="${value.judul}"
-                                data-harga="${value.konten}"
                                 data-id="${value.id}"
+                                data-nama="${value.nama}"
+                                data-harga="${value.harga}"
                                 >Edit</button>
-                                <button class="btn btn-sm btn-danger" data-id="${value.id}" id="hapus-data">Hapus</button>
+                                <button class="btn btn-sm btn-danger edit-data" data-id="${value.id}" id="hapus-data">Hapus</button>
                             </td>
                         </tr>
                         `
@@ -88,9 +88,9 @@
             processData: false,
             async:false,
             dataType: 'json',
-            success:function(formData){
+            success:function(result){
                 $('#modalTambah').modal('hide');
-                alert(formData.message)
+                alert(result.message)
                 location.reload();
             },
             complete: function() {
@@ -99,10 +99,42 @@
         });
     });
 
-    // Edit Data
-    function Edit(id){
+    // get Edit data
+    $('#modalEdit').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var nama = button.data('nama')
+        var harga = button.data('harga')
+        var modal = $(this)
+        modal.find('.modal-body input[name="id"]').val(id)
+        modal.find('.modal-body input[name="nama"]').val(nama)
+        modal.find('.modal-body input[name="harga"]').val(harga)
+    })
 
-    }
+    // Update Data
+    $('#editData').submit(function(e){
+        var formData    = new FormData($('#editData')[0]);
+        var id = formData.get('id');
+        e.preventDefault();
+        $.ajax({
+            url: "/api/produk/"+id,
+            type:'POST',
+            data:formData,
+            cache: true,
+            contentType: false,
+            processData: false,
+            async:false,
+            dataType: 'json',
+            success:function(result){
+                alert(result.message)
+                location.reload();
+            },
+        });
+    });
+
+
+
+
     // Hapus Data
     $(".table").on('click', '#hapus-data', function () {
         var id = $(this).data("id");

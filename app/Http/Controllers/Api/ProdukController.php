@@ -81,7 +81,7 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $produk = Produk::findOrFail($id);
-        $produk->produk = $request->produk;
+        $produk->nama = $request->nama;
         $produk->harga = $request->harga;
         $produk->save();
         $response = [
