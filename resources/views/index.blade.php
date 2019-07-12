@@ -365,8 +365,8 @@
 
                         <!-- Trending Articles Widget -->
                         <div class="treading-articles-widget mb-70">
-                            <h4>Trending Articles</h4>
-                            <div class="row" id="article-trending"></div>
+                            <h4>Trending Articles</h4>id="article-tre
+                            <div class="row" nding"></div>
 
                         </div>
 

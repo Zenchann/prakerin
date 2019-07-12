@@ -14,7 +14,7 @@
                         <div class="single-blog-post style-3">
                             <!-- Post Thumb -->
                             <div class="post-thumb">
-                                <a href="#"><img src="${value.foto}" style="width:290px; height:215px;" alt=""></a>
+                                <a href="#"><img src="/assets/img/fotoartikel/${value.foto}" style="width:290px; height:215px;" alt=""></a>
                             </div>
                             <!-- Post Data -->
                             <div class="post-data">
@@ -48,7 +48,7 @@
                     <div class="single-blog-post style-4">
                         <!-- Post Thumb -->
                         <div class="post-thumb">
-                            <a href="#"><img src="${value.foto}" style="width:290px; height:97px;" alt=""></a>
+                            <a href="#"><img src="/assets/img/fotoartikel/${value.foto}" style="width:290px; height:97px;" alt=""></a>
                             <span class="serial-number">${no++}</span>
                         </div>
                         <!-- Post Data -->

@@ -67,9 +67,8 @@ $(document).ready(function() {
                 { data: 'slug', name: 'slug' },
                 { data: 'kategori.nama_kategori', name: 'kategori.nama_kategori' },
                 { data: 'user.name', name: 'user.name' },
-                { data: 'tag', render :  function(tag){
-                    console.log(tag)
-
+                { data: 'tag[].nama_tag', render :  function(nama_tag){
+                    return `${nama_tag}`;
                     }
                 },
                 { data: 'foto', render :  function(foto){
@@ -77,8 +76,8 @@ $(document).ready(function() {
                     }
                 },
                 { data: 'id', render : function (id) {
-                    return  '<a class="btn btn-warning btn-sm" onclick="kategoritEdit('+id+')" id="kategoritEdit">Edit</a>'+
-                        ' <a class="btn btn-danger btn-sm" onclick="kategoritDelete('+id+')" id="kategoritDelete">Hapus</a>';
+                    return  `<a class="btn btn-warning btn-sm" onclick="kategoritEdit(+id+)" id="kategoritEdit">Edit</a>
+                        <a class="btn btn-danger btn-sm" id="btn-hapus" data-id="${id}" >Hapus</a>`;
                     }
                 }
             ]
@@ -104,7 +103,7 @@ $(document).ready(function() {
             }
         });
 
-        // Get Tag
+        // Get data Tag
         $('.tag').select2({});
         $.ajax({
             url: '/api/tag',
@@ -149,6 +148,26 @@ $(document).ready(function() {
             }
         });
     });
+    // Hapus
+    $("#datatable").on('click', '#btn-hapus', function () {
+    var id = $(this).data("id");
+    // alert(id)
+        $.ajax({
+            url: '/api/artikel/' + id,
+            method: "DELETE",
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: function (berhasil) {
+                alert(berhasil.message)
+                location.reload();
+            },
+            error: function (gagal) {
+                console.log(gagal)
+            }
+        })
+    })
 });
 </script>
 @endpush
