@@ -43,7 +43,7 @@ class FrontController extends Controller
 
     public function blogtag(Tag $tag)
     {
-        $artikel = $tag->Artikel()->latest()->paginate(5);
+        $artikel = $tag->Artikel()->latest()->get();
         $response = [
             'success' => true,
             'data' => $artikel,
@@ -55,7 +55,7 @@ class FrontController extends Controller
 
     public function blogkategori(Kategori $kategori)
     {
-        $artikel = $kategori->Artikel()->latest()->paginate(5);
+        $artikel = $kategori->Artikel()->with('user', 'kategori', 'tag')->latest()->get();
         $response = [
             'success' => true,
             'data' => $artikel,

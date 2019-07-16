@@ -16,7 +16,7 @@
                         <img src="/assets/img/fotoartikel/${getdata.data.foto}" style="width:729px; height:434px;" alt="">
                     </div>
                     <div class="post-data">
-                        <a href="#" class="post-catagory">${getdata.data.kategori.nama_kategori}</a>
+                        <a href="/blog-kategori/${getdata.data.kategori.slug}" class="post-catagory">${getdata.data.kategori.nama_kategori}</a>
                         <h2 class="post-title">${getdata.data.judul}</h2>
                         <div class="post-meta">
 

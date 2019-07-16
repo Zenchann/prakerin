@@ -8,6 +8,7 @@ Route::get('/', function () {
 
 
 Route::get('/blog/{artikel}', 'FrontController@singleblog');
+Route::get('/blog-kategori/{kategori}', 'FrontController@blogkategori');
 
 Auth::routes();
 
