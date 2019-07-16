@@ -13,4 +13,9 @@ class Tag extends Model
     {
         return $this->belongsToMany('App\Artikel', 'artikel_tag', 'id_tag', 'id_artikel');
     }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

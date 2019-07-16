@@ -12,9 +12,11 @@ Route::group(
     function () {
         // Json
         Route::resource('kategori', 'KategoriController');
+        Route::get('blog/{artikel}', 'Api\FrontController@singleblog');
+        Route::get('blog-tag/{tag}', 'Api\FrontController@blogtag');
+        Route::get('blog-kategori/{kategori}', 'Api\FrontController@blogkategori');
         Route::get('tag', 'TagController@getjson')->name('json_tag');
         Route::get('front', 'Api\FrontController@index')->name('json_front');
-        Route::get('blog/{artikel}', 'Api\FrontController@singleblog')->name('json_singleblog');
         Route::resource('artikel', 'Api\ArtikelController');
         Route::resource('/produk', 'Api\ProdukController');
     }

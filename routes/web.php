@@ -18,8 +18,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Admin
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
-    // Resource+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+    // Resource
     Route::resource('/kategori', 'KategoriController');
     Route::resource('/tag', 'TagController');
     Route::resource('/produk', 'ProdukController');

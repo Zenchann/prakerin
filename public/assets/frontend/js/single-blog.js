@@ -1,7 +1,7 @@
 (function ($) {
 
     var grabedurl = window.location.pathname;
-    var url = '/api/' + grabedurl;
+    var url = '' + grabedurl;
     var no = 1;
     //get 1 article by slug
     $.ajax({
@@ -43,4 +43,4 @@
         }
     });
     console.log(grabedurl)
-})
+})(jQuery);

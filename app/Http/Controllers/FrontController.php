@@ -9,6 +9,6 @@ class FrontController extends Controller
 {
     public function singleblog(Artikel $artikel)
     {
-        return view('single-blog');
+        return view('single-blog', compact('artikel'));
     }
 }

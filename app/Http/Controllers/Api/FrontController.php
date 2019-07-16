@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Kategori;
 use App\Artikel;
+use App\Tag;
 
 class FrontController extends Controller
 {
@@ -36,7 +37,31 @@ class FrontController extends Controller
             'data' => $artikel,
             'message' => 'Berhasil.'
         ];
-        // dd($tgl);
+        dd($artikel);
+        return response()->json($response, 200);
+    }
+
+    public function blogtag(Tag $tag)
+    {
+        $artikel = $tag->Artikel()->latest()->paginate(5);
+        $response = [
+            'success' => true,
+            'data' => $artikel,
+            'message' => 'Berhasil.'
+        ];
+        // dd($artikel);
+        return response()->json($response, 200);
+    }
+
+    public function blogkategori(Kategori $kategori)
+    {
+        $artikel = $tag->Artikel()->latest()->paginate(5);
+        $response = [
+            'success' => true,
+            'data' => $artikel,
+            'message' => 'Berhasil.'
+        ];
+        // dd($artikel);
         return response()->json($response, 200);
     }
 }
