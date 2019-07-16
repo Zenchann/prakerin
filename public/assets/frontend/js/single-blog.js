@@ -1,7 +1,7 @@
 (function ($) {
 
     var grabedurl = window.location.pathname;
-    var url = '' + grabedurl;
+    var url = '/api' + grabedurl;
     var no = 1;
     //get 1 article by slug
     $.ajax({
@@ -13,7 +13,7 @@
                 `
                 <div class="single-blog-post-details">
                     <div class="post-thumb">
-                        <img src="${getdata.data.foto}" style="width:729px; height:434px;" alt="">
+                        <img src="/assets/img/fotoartikel/${getdata.data.foto}" style="width:729px; height:434px;" alt="">
                     </div>
                     <div class="post-data">
                         <a href="#" class="post-catagory">${getdata.data.kategori.nama_kategori}</a>
@@ -42,5 +42,5 @@
             console.log(getdata);
         }
     });
-    console.log(grabedurl)
+    console.log(url)
 })(jQuery);

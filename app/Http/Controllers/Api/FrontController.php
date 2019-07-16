@@ -37,7 +37,7 @@ class FrontController extends Controller
             'data' => $artikel,
             'message' => 'Berhasil.'
         ];
-        dd($artikel);
+        // dd($artikel);
         return response()->json($response, 200);
     }
 
@@ -55,7 +55,7 @@ class FrontController extends Controller
 
     public function blogkategori(Kategori $kategori)
     {
-        $artikel = $tag->Artikel()->latest()->paginate(5);
+        $artikel = $kategori->Artikel()->latest()->paginate(5);
         $response = [
             'success' => true,
             'data' => $artikel,
