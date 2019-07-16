@@ -1,27 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container tag" id="indextag">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
                     Tag Artikel
-                    <button type="button" class="btn-sm btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
-                        Tambah Data
-                    </button>
+                    <button class="btn btn-sm btn-success float-right" data-toggle="modal" data-target="#modalTambahTag">Tambah</button>
                 </div>
 
-                <div class="card-body">
-                    <center>
-                        @include('admin.tag.create')
-                    </center>
+                <div class="card-body" >
                     <br>
                     <div class="table-responsive">
-                        <table id="datatable" class="table">
+                        <table id="datatable-tag" class="table">
                             <thead>
                                 <tr>
-                                    <th>Nama tag</th>
+                                    <th>Nama Tag</th>
                                     <th>Slug</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -37,59 +32,111 @@
     </div>
 </div>
 @include('admin.tag.create')
+@include('admin.tag.edit')
 @endsection
 
 @push('scripts')
 <script>
 $(document).ready(function() {
+
+    // CSRF
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $('#datatable').dataTable({
+
+
+    // Index Data
+    $('#datatable-tag').dataTable({
         dataType: "json",
-        ajax: "{{ route('api.json_tag') }}",
+        ajax: {
+                url: '/api/tag/',
+                dataType: "json",
+                type: "GET",
+                stateSave : true,
+                serverSide: true,
+                processing: true,
+        },
         responsive:true,
         columns: [
                 { data: 'nama_tag', name: 'nama_tag' },
                 { data: 'slug', name: 'slug' },
-                { data: 'id', render : function (id) {
-                    return `<a class="btn btn-warning btn-sm" id="kategoritEdit">Edit</a>
-                            <a class="btn btn-danger btn-sm hapus-data" data-id="${id}">Hapus</a>`;
+                { data: 'id', render : function (data, type, row, meta) {
+                    return `
+                    <button type="button" class="btn btn-sm btn-success edit-tag"
+                        data-target="#modalEditTag"
+                        data-toggle="modal"
+                        data-id="${row.id}"
+                        data-nama_tag="${row.nama_tag}"
+                        >Edit</button>
+                        <button class="btn btn-sm btn-danger edit-data" data-id="${row.id}" id="hapus-dataTag">Hapus</button>
+                    `;
                     }
                 }
             ]
-    });
+        });
 
-    // Store Data
-    $(".tombol-simpan").click(function (simpan) {
-        simpan.preventDefault();
-        var nama_tag = $("input[name=nama_tag]").val();
-        // console.log(nama_tag)
+        // Store Data tag
+        $('#createDataTag').submit(function (e) {
+        var formData = new FormData($('#createDataTag')[0]);
+        e.preventDefault();
         $.ajax({
-            url: "{{ route('admin.tag.store') }}",
-            method: "POST",
-            dataType: "json",
-            data: {
-                nama_tag: nama_tag,
-            },
-            success: function (berhasil) {
-                alert(berhasil.message)
+            url: "/api/tag",
+            type: 'POST',
+            data: formData,
+            cache: true,
+            contentType: false,
+            processData: false,
+            async: false,
+            dataType: 'json',
+            success: function (result) {
+                $('#modalTambahtag').modal('hide');
+                alert(result.message)
                 location.reload();
             },
-            error: function (gagal) {
-                console.log(gagal)
+            complete: function () {
+                $("#createDataTag")[0].reset();
             }
-        })
+        });
     });
 
-    // Delete Data
-    $("#datatable").on('click', '.hapus-data', function () {
+    // get Edit data
+    $('#modalEditTag').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var nama_tag = button.data('nama_tag')
+        var modal = $(this)
+        modal.find('.modal-body input[name="id"]').val(id)
+        modal.find('.modal-body input[name="nama_tag"]').val(nama_tag)
+    })
+
+    // Update Data tag
+    $('#editDataTag').submit(function (e) {
+        var formData = new FormData($('#editDataTag')[0]);
+        var id = formData.get('id');
+        e.preventDefault();
+        $.ajax({
+            url: "/api/tag/" + id,
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            async: false,
+            dataType: 'json',
+            success: function (result) {
+                alert(result.message)
+                location.reload();
+            },
+        });
+    });
+
+    // Hapus Data
+    $("#datatable-tag").on('click', '#hapus-dataTag', function () {
         var id = $(this).data("id");
         // alert(id)
         $.ajax({
-            url: '/admin/tag/'+id,
+            url: '/api/tag/' + id,
             method: "DELETE",
             dataType: "json",
             data: {
@@ -104,6 +151,7 @@ $(document).ready(function() {
             }
         })
     })
+
 });
 </script>
 @endpush

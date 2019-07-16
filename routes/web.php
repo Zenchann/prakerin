@@ -5,9 +5,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-// Route::get('siswa', function () {
-//     return view('siswa');
-// });
 
 
 Route::get('/blog/{artikel}', 'FrontController@singleblog');
@@ -18,7 +15,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Admin
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
     // Resource
     Route::resource('/kategori', 'KategoriController');
     Route::resource('/tag', 'TagController');

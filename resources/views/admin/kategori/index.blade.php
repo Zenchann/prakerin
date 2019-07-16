@@ -7,15 +7,13 @@
             <div class="card">
                 <div class="card-header">
                     Kategori Artikel
-                    <button type="button" class="btn-sm btn btn-primary float-right" id="changeViewKategori">
-                        Tambah Data
-                    </button>
+                    <button class="btn btn-sm btn-success float-right" data-toggle="modal" data-target="#modalTambahKategori">Tambah</button>
                 </div>
 
                 <div class="card-body" >
                     <br>
                     <div class="table-responsive">
-                        <table id="datatable" class="table">
+                        <table id="datatable-kategori" class="table">
                             <thead>
                                 <tr>
                                     <th>Nama Kategori</th>
@@ -38,22 +36,19 @@
 @endsection
 
 @push('scripts')
-{{-- CSRF --}}
 <script>
-    $(document).ready(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    });
-</script>
-{{-- End CSRF --}}
+$(document).ready(function() {
 
-{{-- Get Index Data --}}
-<script>
+    // CSRF
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
     // Index Data
-    $('#datatable').dataTable({
+    $('#datatable-kategori').dataTable({
         dataType: "json",
         ajax: {
                 url: '/api/kategori/',
@@ -67,108 +62,81 @@
         columns: [
                 { data: 'nama_kategori', name: 'nama_kategori' },
                 { data: 'slug', name: 'slug' },
-                { data: 'id', render : function (id) {
+                { data: 'id', render : function (data, type, row, meta) {
                     return `
-                    <a class="btn btn-success btn-sm" onclick="kategoriEdit(${id})" id="kategoriEdit">Edit</a>
-                    <a class="btn btn-danger btn-sm hapus-data" data-id="${id}">Hapus</a>
+                    <button type="button" class="btn btn-sm btn-success edit-kategori"
+                        data-target="#modalEditKategori"
+                        data-toggle="modal"
+                        data-id="${row.id}"
+                        data-nama_kategori="${row.nama_kategori}"
+                        >Edit</button>
+                        <button class="btn btn-sm btn-danger edit-data" data-id="${row.id}" id="hapus-dataKategori">Hapus</button>
                     `;
                     }
                 }
             ]
         });
-</script>
-{{-- End Index --}}
 
-{{-- Create Form & Store Data --}}
-<script>
-    // Store Data
-    $('#createData').submit(function(e){
-        var formData    = new FormData($('#createData'));
+        // Store Data Kategori
+        $('#createDataKategori').submit(function (e) {
+        var formData = new FormData($('#createDataKategori')[0]);
         e.preventDefault();
         $.ajax({
             url: "/api/kategori",
-            type:'POST',
-            data:formData,
+            type: 'POST',
+            data: formData,
             cache: true,
             contentType: false,
             processData: false,
-            async:false,
+            async: false,
             dataType: 'json',
-            success:function(formData){
-                $('#createFormKategori').hide();
-                alert(formData.message)
-                $('#datatable').DataTable().ajax.reload();
+            success: function (result) {
+                $('#modalTambahKategori').modal('hide');
+                alert(result.message)
+                location.reload();
             },
-            complete: function() {
-                $("#indexKategori").show();
-                $("#createData")[0].reset();
+            complete: function () {
+                $("#createDataKategori")[0].reset();
             }
         });
     });
-</script>
-{{-- end Create Form & Store Data --}}
 
-<script>
+    // get Edit data
+    $('#modalEditKategori').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var nama_kategori = button.data('nama_kategori')
+        var modal = $(this)
+        modal.find('.modal-body input[name="id"]').val(id)
+        modal.find('.modal-body input[name="nama_kategori"]').val(nama_kategori)
+    })
 
-    // get Edit Form
-    function kategoriEdit(id)
-    {
-        console.log(id);
-        // var dataUrl=$('.barangEdit').data('id-url');
-        $('.kategori').hide();
-        $('.kategoriEdit').show().attr('hidden', false);
-        $.ajax({
-            url: '/api/kategori/'+id,
-            type:'get',
-            cache: true,
-            contentType: false,
-            processData: false,
-            async:false,
-            dataType: 'json',
-            success:function(data){
-            console.log(data.data.nama_kategori);
-            $('input#id').val(data.id);
-            $('input#nama_kategori').val(data.data.nama_kategori);
-            },
-            complete: function() {
-                // $('#indexkategori').attr('hidden', false);
-            }
-        });
-    }
-</script>
-
-<script>
-    $('.myFormEdit').submit(function(e){
-        var formData    = new FormData($('.myFormEdit')[0]);
+    // Update Data kategori
+    $('#editDataKategori').submit(function (e) {
+        var formData = new FormData($('#editDataKategori')[0]);
         var id = formData.get('id');
         e.preventDefault();
         $.ajax({
-            url: '/api/kategori/'+id,
-            type:'post',
-            data:formData,
-            cache: true,
+            url: "/api/kategori/" + id,
+            type: 'POST',
+            data: formData,
             contentType: false,
             processData: false,
-            async:false,
+            async: false,
             dataType: 'json',
-            success:function(respone){
-                $('.kategoriEdit').hide();
-                $('#datatable').DataTable().ajax.reload();
+            success: function (result) {
+                alert(result.message)
+                location.reload();
             },
-            complete: function() {
-                $('#indexKategori').show();
-            }
         });
     });
-</script>
 
-<script>
-    // Delete Data
-    $("#datatable").on('click', '.hapus-data', function () {
+    // Hapus Data
+    $("#datatable-kategori").on('click', '#hapus-dataKategori', function () {
         var id = $(this).data("id");
         // alert(id)
         $.ajax({
-            url: '/api/kategori/'+id,
+            url: '/api/kategori/' + id,
             method: "DELETE",
             dataType: "json",
             data: {
@@ -176,12 +144,14 @@
             },
             success: function (berhasil) {
                 alert(berhasil.message)
-                $('#datatable').DataTable().ajax.reload();
+                location.reload();
             },
             error: function (gagal) {
                 console.log(gagal)
             }
         })
     })
+
+});
 </script>
 @endpush
