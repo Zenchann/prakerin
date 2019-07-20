@@ -92,8 +92,14 @@ $(document).ready(function() {
             dataType: 'json',
             success: function (result) {
                 $('#modalTambahKategori').modal('hide');
-                alert(result.message)
-                location.reload();
+                $('#createDataKategori').trigger("reset");
+                Swal.fire({
+                    type: 'success',
+                    title: 'Data Berhasil ditambah!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                })
+                dataTable.reload();
             },
             complete: function () {
                 $("#createDataKategori")[0].reset();

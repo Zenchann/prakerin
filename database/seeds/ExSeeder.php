@@ -32,7 +32,7 @@ class ExSeeder extends Seeder
         ]);
 
         $faker = Faker::create('id_ID');
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $gender = $faker->randomElement(['male', 'female']);
             $siswa = new Siswa;
             $siswa->nama = $faker->name($gender);
@@ -47,14 +47,14 @@ class ExSeeder extends Seeder
             $siswa->tgl_lahir = $faker->date;
             $siswa->save();
         }
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $kategori = new Kategori();
             $kategori->nama_kategori = $faker->word;
             $kategori->slug = $faker->slug;
             $kategori->save();
         }
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $tag = new Tag();
             $tag->nama_tag = $faker->word;
             $tag->slug = $faker->slug;
